@@ -3,8 +3,7 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import router from "./src/routers/index.js";
-import { swaggerUi, specs } from "./src/swagger/swagger.js";
+import router from "./src/router/index.js";
 
 
 const app = express();
@@ -20,12 +19,8 @@ app.use(bodyParser.json());
 
 
 app.use('/', router);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
-
-
 
 const SERVER_HOST = process.env.SERVER_HOST;
-
 const port = 3000;
 
 app.listen(port, '0.0.0.0', () => {
