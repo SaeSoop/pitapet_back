@@ -16,17 +16,13 @@ app.use(cors({
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-
 app.use('/', router);
 
+//3000번에서 듣고있음
 const SERVER_HOST = process.env.SERVER_HOST;
-const port = 3000;
 
-app.listen(port, '0.0.0.0', () => {
-    console.log(`✅ Server running at http://localhost:${port} 🚀`);
+app.listen(SERVER_HOST, '0.0.0.0', () => {
+    console.log(`✅ Server running at http://localhost:${SERVER_HOST} 🚀`);
   });
-  
-//aaa
 
 export default app;
