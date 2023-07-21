@@ -11,12 +11,12 @@ export const redisClient = redis.createClient({
 
 //Redis 연결 성공
 redisClient.on('connect', () => {
-  console.info('Redis connected!');
+  console.info('✅ Redis connected!');
 });
 
 //Redis 연결 실패
 redisClient.on('error', (err) => {
-  console.error('Redis Client Error', err);
+  console.error('❌ Redis Client Error', err);
 
 });
 
