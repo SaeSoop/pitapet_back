@@ -25,4 +25,4 @@ export const authJWT = (req, res, next) => {
     }
   };
 
-  
+export default authJWT;

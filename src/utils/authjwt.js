@@ -10,7 +10,7 @@ const secret = process.env.JWT_SECRET;
 export const sign = (user) => {
   //payload 발급
   const payload = {
-    user_id: user[0].user_id,
+    user_id: user.user_id,
   };
 
   //access token 발급

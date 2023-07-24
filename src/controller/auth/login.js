@@ -1,31 +1,35 @@
 import pool from "../../config/database.js";
-import { sign,refresh } from "../../utils/authjwt.js";
+import { sign, refresh } from "../../utils/authjwt.js";
 import bcrypt from "bcrypt";
 import { redisClient } from "../../utils/cache.js";
+import { auth_user } from "../../dao/auth/signDao.js";
 
 
 export const login = async (req, res) => {
 
+    //params
     const { email, password } = req.body;
 
     const conn = await pool.getConnection();
 
-    const sql = `SELECT user_id, email, password FROM User WHERE email=?`;
-    const [userInfo] = await conn.query(sql, [email])
+    //DB
+    const [userInfo] = await auth_user(conn, email);
 
-
+    //유저 정보가 없을 경우
     if (userInfo.length === 0) {
         return res.status(401).send({
             ok: false,
             msg: 'user does not exist'
         })
     } else {
+        //유저 정보가 있을 경우 
         const user = userInfo[0];
-        const chk = await bcrypt.compare(password, user.password);
+        //비밀번호 확인
+        const chk = await bcrypt.compare(password, user.pwd);
 
-
+        //비밀번호 일치
         if (chk) {
-
+            //jwt 토큰 발급
             const accessToken = sign(user);
             const refreshToken = refresh();
 
@@ -44,8 +48,9 @@ export const login = async (req, res) => {
                     accessToken,
                     refreshToken
                 },
-            });
+            })
         } else {
+            //비밀번호 불일치
             res.status(401).send({
                 ok: false,
                 msg: 'password is incorret. '
@@ -54,3 +59,5 @@ export const login = async (req, res) => {
     }
 
 }
+
+export default login;
