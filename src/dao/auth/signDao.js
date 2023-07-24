@@ -17,3 +17,12 @@ export const insert_user = async (conn, params) => {
 
     return [newUser];
 }
+
+//유저 인증 
+export const auth_user = async (conn, email) => {
+    const checkUser_query = `SELECT user_id,email,pwd FROM User WHERE email=?;`;
+
+    const [user] = await conn.query(checkUser_query, [email]);
+
+    return [user];
+};

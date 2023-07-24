@@ -1,6 +1,6 @@
 import pool from "../../config/database.js";
 import bcrypt from "bcrypt";
-import { redisClient, set } from "../../utils/cache.js"
+import { set } from "../../utils/cache.js"
 import { sign, refresh } from "../../utils/authjwt.js";
 import { check_user, insert_user } from "../../dao/auth/signDao.js";
 
