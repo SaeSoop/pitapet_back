@@ -35,7 +35,7 @@ export const join = async (req, res) => {
             const [newUser] = await insert_user(conn, params);
 
             //토큰 발급
-            const AccessToken = sign(newUser);
+            const AccessToken = sign(newUser[0]);
             const RefreshToken = refresh(newUser);
 
             //refresh 토큰 redis에 저장
