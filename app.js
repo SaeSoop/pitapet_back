@@ -5,6 +5,8 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import router from "./src/router/index.js";
 
+//const myPuppyRoute = require('./router/my_puppy'); //my-puppy 라우트를 추가
+
 
 const app = express();
 
@@ -16,13 +18,18 @@ app.use(cors({
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 app.use('/', router);
 
-//3000번에서 듣고있음
+app.use(express.json({
+    limit : '50mb'
+}));
+
 const SERVER_HOST = process.env.SERVER_HOST;
 
 app.listen(SERVER_HOST, '0.0.0.0', () => {
     console.log(`✅ Server running at http://localhost:${SERVER_HOST} 🚀`);
   });
+
 
 export default app;
