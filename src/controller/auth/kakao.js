@@ -12,10 +12,11 @@ export const kakao = async (req, res) => {
         }
     });
 
-    //
+    //params
     const { data } = result;
     const email = data.kakao_account.email;
 
+    //DB
     const [accessToken] = await SignInSocial('kakao',[email]);
 
     res.status(200).send({
