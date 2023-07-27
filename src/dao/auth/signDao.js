@@ -26,3 +26,14 @@ export const auth_user = async (conn, email) => {
 
     return [user];
 };
+
+//카카오 유저 생성
+export const kakao_insert_user = async (conn, params) => {
+    const insertUser_query = `INSERT INTO User (email) VALUES (?);`;
+    const selectUserID_query = `SELECT user_id FROM User WHERE email = ?`
+
+    await conn.query(insertUser_query, params);
+    const [newUser] = await conn.query(selectUserID_query, params);
+
+    return [newUser];
+}
