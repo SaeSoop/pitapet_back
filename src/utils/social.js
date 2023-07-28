@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import pool from "../config/database.js";
 import { social_insert_user, social_select_user, insert_user } from "../dao/auth/signDao.js";
-import { isExist } from "./check.js";
+import { isUserExist } from "./isExist.js";
 import dotenv from 'dotenv';
 dotenv.config();
 

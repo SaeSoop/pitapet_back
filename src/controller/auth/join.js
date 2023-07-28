@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import { set } from "../../utils/cache.js"
 import { sign, refresh } from "../../utils/authjwt.js";
 import { insert_user } from "../../dao/auth/signDao.js";
-import { isExist } from "../../utils/check.js";
+import { isUserExist } from "../../utils/isExist.js";
 
 export const join = async (req, res) => {
     //params
