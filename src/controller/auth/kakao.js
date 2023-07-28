@@ -3,9 +3,9 @@ import axios from "axios";
 
 export const kakao = async (req, res) => {
     //테스트용
-    // const headers = "JllevHXnq70IYbDAfEJP3DSBayils1gChtji8dNiCj10aAAAAYmbmuN2";
+    const headers = "JllevHXnq70IYbDAfEJP3DSBayils1gChtji8dNiCj10aAAAAYmbmuN2";
 
-    const headers = req.headers["authorization"];
+    // const headers = req.headers["authorization"];
     const result = await axios.get("https://kapi.kakao.com/v2/user/me", {
         headers: {
             Authorization: `Bearer ${headers}`,

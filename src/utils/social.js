@@ -15,7 +15,7 @@ export const SignInSocial = async (which, params) => {
 
     const [alreadyUser] = await isExist(conn, params[0]);
 
-    if (alreadyUser) {
+    if (alreadyUser && which !=alreadyUser) {
         return [alreadyUser];
     } else {
         //DB 회원가입 & 사용자가 없을 경우

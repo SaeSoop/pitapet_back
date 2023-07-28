@@ -44,9 +44,9 @@ export const naver_callback = async (req, res) => {
 //네이버로부터 토큰을 발급받은 후 DB에 저장
 export const naver_token = async (req, res) => {
     //테스트용
-    // const headers = "AAAAODyfZuzjRS1XRf8zI17FatzsLIFu4OD5qkIMFxtbti5QHthgwgofkFFZmRKGKboDQgUli8WGnFCoHbQCe_rMXaY";
+    const headers = "AAAAODyfZuzjRS1XRf8zI17FatzsLIFu4OD5qkIMFxtbti5QHthgwgofkFFZmRKGKboDQgUli8WGnFCoHbQCe_rMXaY";
 
-    const headers = req.headers["authorization"];
+    // const headers = req.headers["authorization"];
     const result = await axios.get("https://openapi.naver.com/v1/nid/me", {
         headers: {
             Authorization: `Bearer ${headers}`,
