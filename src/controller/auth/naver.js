@@ -44,9 +44,9 @@ export const naver_callback = async (req, res) => {
 //네이버로부터 토큰을 발급받은 후 DB에 저장
 export const naver_token = async (req, res) => {
     //테스트용
-    const headers = "AAAAOCjUzQBe8VBNNrxr_cT_olem0hApSmjj5wcRa2wCcwuj1MtYZLdetgKCRVETmLepxkiRtwUJ4VmsJws2SPUkuXU";
+    // const headers = "AAAAODyfZuzjRS1XRf8zI17FatzsLIFu4OD5qkIMFxtbti5QHthgwgofkFFZmRKGKboDQgUli8WGnFCoHbQCe_rMXaY";
 
-    // const headers = req.headers["authorization"];
+    const headers = req.headers["authorization"];
     const result = await axios.get("https://openapi.naver.com/v1/nid/me", {
         headers: {
             Authorization: `Bearer ${headers}`,
@@ -65,12 +65,13 @@ export const naver_token = async (req, res) => {
     //DB
     const [accessToken] = await SignInSocial('naver', params);
 
-    if(accessToken=='already'){
-        res.status(200).send({
-            ok:false,
-            msg:'Alreay exists',
+    if (accessToken.length < 7) {
+        res.status(404).send({
+            ok: false,
+            msg: 'Already exists',
+            join: accessToken,
         })
-    }else{
+    } else {
         res.status(200).send({
             ok: true,
             accessToken: accessToken,
