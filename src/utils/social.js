@@ -20,6 +20,8 @@ export const SignInSocial = async (which,params) => {
         }else if(which==='naver'){
             await insert_user(conn,params);
         }
+    } else{
+        return ['already'];
     }
 
     const [user] = await social_select_user(conn, params[0]);

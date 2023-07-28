@@ -9,7 +9,6 @@ export const login = async (req, res) => {
 
     //params
     const { email, password } = req.body;
-
     const conn = await pool.getConnection();
 
     //DB

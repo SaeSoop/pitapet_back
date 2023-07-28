@@ -1,6 +1,6 @@
 //유저 이메일 중복 확인 
 export const check_user = async (conn, email) => {
-    const checkUser_query = `SELECT email FROM User WHERE email=?;`;
+    const checkUser_query = `SELECT email,pwd FROM User WHERE email=?;`;
 
     const [alreadyUser] = await conn.query(checkUser_query, [email]);
 
