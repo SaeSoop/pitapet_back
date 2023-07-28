@@ -2,7 +2,8 @@ import pool from "../../config/database.js";
 import bcrypt from "bcrypt";
 import { set } from "../../utils/cache.js"
 import { sign, refresh } from "../../utils/authjwt.js";
-import { check_user, insert_user } from "../../dao/auth/signDao.js";
+import { insert_user } from "../../dao/auth/signDao.js";
+import { isUserExist } from "../../utils/isExist.js";
 
 export const join = async (req, res) => {
     //params
@@ -14,17 +15,16 @@ export const join = async (req, res) => {
         const conn = await pool.getConnection();
 
         //이미 있는 사용자인지 확인
-        const [alreadyUser] = await check_user(conn, email);
+        const [alreadyUser] = await isUserExist(conn, email);
 
-        //이미 있는 사용자일 경우
-        if (alreadyUser.length > 0) {
-            res.status(404).json({
+        if (alreadyUser) {
+            res.status(404).send({
                 ok: false,
-                msg: ' This E-mail is already taken.'
+                msg: 'Already exists',
+                join: alreadyUser,
             })
-
-            //새로운 유저 생성
         } else {
+
             //비밀번호 암호화
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
@@ -47,8 +47,8 @@ export const join = async (req, res) => {
                 AccessToken: AccessToken,
                 RefreshToken: RefreshToken
             })
-        }
 
+        }
         //에러 처리
     } catch (err) {
         res.status(404).send({

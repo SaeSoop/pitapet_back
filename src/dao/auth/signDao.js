@@ -1,6 +1,6 @@
 //유저 이메일 중복 확인 
 export const check_user = async (conn, email) => {
-    const checkUser_query = `SELECT email FROM User WHERE email=?;`;
+    const checkUser_query = `SELECT email,pwd FROM User WHERE email=?;`;
 
     const [alreadyUser] = await conn.query(checkUser_query, [email]);
 
@@ -27,13 +27,19 @@ export const auth_user = async (conn, email) => {
     return [user];
 };
 
-//카카오 유저 생성
-export const kakao_insert_user = async (conn, params) => {
-    const insertUser_query = `INSERT INTO User (email) VALUES (?);`;
-    const selectUserID_query = `SELECT user_id FROM User WHERE email = ?`
+//소셜 로그인 유저 생성
+export const social_insert_user = async (conn, params) => {
+    const insertUser_query = `INSERT INTO User (email,pwd) VALUES (?,?);`;
 
     await conn.query(insertUser_query, params);
-    const [newUser] = await conn.query(selectUserID_query, params);
 
-    return [newUser];
+    return;
+}
+
+//소셜 로그인 유저 아이디 가져오기
+export const social_select_user = async (conn, params) => {
+    const selectUserID_query = `SELECT user_id FROM User WHERE email = ?`;
+    const [user] = await conn.query(selectUserID_query, params);
+
+    return [user];
 }

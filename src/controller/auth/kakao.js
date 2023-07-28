@@ -1,23 +1,37 @@
-import signInKakao from"../../utils/kakao.js";
+import SignInSocial from "../../utils/social.js";
+import axios from "axios";
 
 export const kakao = async (req, res) => {
-    const headers = req.headers["authorization"];
-    
     //테스트용
-    // const headers = "CeIy0ki8IWkb5RDCzhtp4hdjey3c4-OPGsLAUV5pCinJYAAAAYmVpudT";
-    const [accessToken] = await signInKakao(headers);
-    
-    if(accessToken){
+    // const headers = "JllevHXnq70IYbDAfEJP3DSBayils1gChtji8dNiCj10aAAAAYmbmuN2";
+
+    const headers = req.headers["authorization"];
+    const result = await axios.get("https://kapi.kakao.com/v2/user/me", {
+        headers: {
+            Authorization: `Bearer ${headers}`,
+        }
+    });
+
+    //params
+    const { data } = result;
+    const email = data.kakao_account.email;
+
+    //DB
+    const [accessToken] = await SignInSocial('kakao', [email]);
+
+    if (accessToken.length < 7) {
+        res.status(404).send({
+            ok: false,
+            msg: 'Already exists',
+            join: accessToken,
+        })
+    } else {
         res.status(200).send({
             ok: true,
             accessToken: accessToken,
         });
-    }else{
-        res.status(404).json({
-            ok: false,
-            msg: ' This E-mail is already taken.'
-        });
     }
+
 
 };
 
