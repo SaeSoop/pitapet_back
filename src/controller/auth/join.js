@@ -15,7 +15,7 @@ export const join = async (req, res) => {
         const conn = await pool.getConnection();
 
         //이미 있는 사용자인지 확인
-        const [alreadyUser] = await isExist(conn, email);
+        const [alreadyUser] = await isUserExist(conn, email);
 
         if (alreadyUser) {
             res.status(404).send({

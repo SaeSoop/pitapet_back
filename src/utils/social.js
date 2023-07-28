@@ -13,7 +13,7 @@ export const SignInSocial = async (which, params) => {
     //DB 사용자가 있는지 확인
     const conn = await pool.getConnection();
 
-    const [alreadyUser] = await isExist(conn, params[0]);
+    const [alreadyUser] = await isUserExist(conn, params[0]);
 
     if (alreadyUser && which !=alreadyUser) {
         return [alreadyUser];
