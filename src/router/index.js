@@ -1,5 +1,6 @@
 import express from "express";
 import authRouter from "../router/auth.js"
+import myPuppyRouter from "../router/my_puppy.js"
 
 const router = express.Router();
 
@@ -7,7 +8,6 @@ const router = express.Router();
 router.use('/api/user', authRouter);
 
 //my-puppy
-// app.use('/my-puppy', myPuppyRoute);    // 라우트를 추가하고 기본 경로로 /my-puppy 사용
-
+router.use('/my-puppy', myPuppyRouter);    // 라우트를 추가하고 기본 경로로 /my-puppy 사용
 
 export default router;

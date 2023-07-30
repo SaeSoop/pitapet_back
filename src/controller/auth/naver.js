@@ -77,7 +77,4 @@ export const naver_token = async (req, res) => {
             accessToken: accessToken,
         });
     }
-    
-
-
 };
