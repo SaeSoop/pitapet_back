@@ -1,15 +1,23 @@
 import mysql from "mysql";
 import sql from "./sql.js";
 
-//Pool을 생성한다.
-const pool = mysql.createPool({
-    connectionLimit : 10,
-    host            : 'localhost',
-    port            : 3306,
-    user            : 'dev01',
-    password        : '1234',
-    database        : 'profiles'
-});
+// //Pool을 생성한다.
+// const pool = mysql.createPool({
+//     connectionLimit : 10,
+//     host            : 'localhost',
+//     port            : 3306,
+//     user            : 'dev01',
+//     password        : '1234',
+//     database        : 'profiles'
+// });
+
+const pool = {
+    host: `${process.env.DB_HOST}`,
+    user: `${process.env.DB_USER}`,
+    port: `${process.env.DB_PORT}`,
+    password: `${process.env.DB_PWD}`,
+    database: `${process.env.DB_NAME}`,
+};
 
 /*쿼리문을 실행하고 결과를 반환하는 함수*/
 /*
