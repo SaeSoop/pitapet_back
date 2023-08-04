@@ -40,13 +40,10 @@ export const login = async (req, res) => {
                     console.log('Redis set result:', result);
                 }
             });
-
             return res.status(200).send({
                 ok: true,
-                data: {
-                    accessToken,
-                    refreshToken
-                },
+                AccessToken:accessToken,
+                RefreshToken:refreshToken
             })
         } else {
             //비밀번호 불일치
