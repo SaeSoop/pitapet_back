@@ -51,7 +51,7 @@ export const naver_token = async (req, res) => {
     } else {
         res.status(200).send({
             ok: true,
-            accessToken: accessToken,
+            AccessToken: accessToken,
         });
     }
 };
