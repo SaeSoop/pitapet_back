@@ -16,6 +16,12 @@ app.use(cors({
     optionsSuccessStatus: 200, // 응답 상태 200으로 설정
 }));
 
+app.use(
+    cors({
+        exposedHeaders: ['Authorization'],
+    }),
+);
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
