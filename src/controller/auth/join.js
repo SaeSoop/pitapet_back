@@ -6,10 +6,14 @@ import { insert_user } from "../../dao/auth/signDao.js";
 import { isUserExist } from "../../utils/isExist.js";
 
 export const join = async (req, res) => {
+
+    console.log("요청 들어왔어요");
     //params
     const { email, pnumber, name, sex, birth } = req.body;
     let { password } = req.body;
     let params = [];
+
+    console.log(req.body);
 
     try {
         const conn = await pool.getConnection();
@@ -57,6 +61,9 @@ export const join = async (req, res) => {
 
         })
     }
+
+    //res.send('/my-puppy/update-profile 라우트');
+    res.json({ success: true, message: '회원가입 성공' });
 };
 
 export default join;
