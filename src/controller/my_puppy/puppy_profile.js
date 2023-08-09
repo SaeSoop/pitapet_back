@@ -1,6 +1,6 @@
 import query from "../../mysql/index.js";
 import sql from "../../mysql/sql.js";
-import { puppy_profile } from "../../dao/auth/myPuppyDao.js";
+import { puppy_profile } from "../../dao/my_puppy/myPuppyDao.js";
 import pool from "../../config/database.js";
 
 
@@ -14,6 +14,8 @@ export const profile = async(req, res) => {
     //DB
     const [myPuppy] = await puppy_profile(conn);
     console.log(myPuppy);
+
+    res.send('메인 페이지');
 }
 
 export default profile;

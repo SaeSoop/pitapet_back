@@ -1,10 +1,39 @@
 import express from 'express';
 import query from "../../mysql/index.js";
 import sql from "../../mysql/sql.js";
-import { insert_puppy } from "../../dao/auth/myPuppyDao.js";
+import { insert_puppy } from "../../dao/my_puppy/myPuppyDao.js";
 import pool from "../../config/database.js";
+import { sign, refresh } from "../../utils/authjwt.js";
+import bcrypt from "bcrypt";
+//import { search_user } from "../../dao/my_puppy/myPuppyDao.js";
+
 
 export const create = async(req, res) => {
+
+    //params
+    const conn = await pool.getConnection();
+
+    //DB
+    const [userInfo] = await search_user(conn, email);
+
+    //유저 정보가 있을 경우  -> id 갖고 오기
+    const user = userInfo[0];
+
+    // //jwt 토큰 발급
+    // const accessToken = sign(user);
+    // const refreshToken = refresh();
+
+    // console.log(accessToken);
+    // console.log(refreshToken);
+
+
+    redisClient.set(email, refreshToken, (error, result) => {
+        if (error) {
+            console.log('Redis set error:', error);
+        } else {
+            console.log('Redis set result:', result);
+        }
+    });
 
     console.log(req.body);
 
@@ -41,8 +70,7 @@ export const create = async(req, res) => {
 
     console.log(param);
 
-    //params
-    const conn = await pool.getConnection();
+    
 
     //DB
     const [myPuppy] = await insert_puppy(conn, param);

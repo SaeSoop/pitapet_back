@@ -1,7 +1,7 @@
 import express from 'express';
-import create from "../controller/auth/puppy_create.js";
-import profile from "../controller/auth/puppy_profile.js";
-import update from "../controller/auth/puppy_update.js";
+import create from "../controller/my_puppy/puppy_create.js";
+import profile from "../controller/my_puppy/puppy_profile.js";
+import update from "../controller/my_puppy/puppy_update.js";
 
 const router = express.Router();
 
