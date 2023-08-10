@@ -5,6 +5,7 @@ import login from "../controller/auth/login.js"
 import kakao from "../controller/auth/kakao.js"
 import { naver_login, naver_token } from "../controller/auth/naver.js";
 import { naver_callback } from "../middlewares/auth.js";
+import { isExist } from "../controller/auth/isExist.js";
 export const router = express.Router();
 
 
@@ -14,6 +15,9 @@ router.post('/login', login);
 //POST /api/user/join
 router.post('/join', join);
 
+//POST /api/user/exist_check
+router.post('/exist_check',isExist);
+
 //GET /api/user/refresh
 router.get('/refresh', refresh);
 
@@ -21,10 +25,10 @@ router.get('/refresh', refresh);
 router.post('/kakao', kakao);
 
 //POST /api/user/naver/login
-router.get('/naver/login', naver_login);
+router.post('/naver/login', naver_login);
 
 //POST /api/user/naver/callback
-router.get('/naver/callback', naver_callback, naver_token);
+router.post('/naver/callback', naver_callback, naver_token);
 
 //POST /api/user/naver/token
 router.post('/naver/token', naver_token);

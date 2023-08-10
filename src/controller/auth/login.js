@@ -16,7 +16,7 @@ export const login = async (req, res) => {
 
     //유저 정보가 없을 경우
     if (userInfo.length === 0) {
-        return res.status(401).send({
+        res.status(401).send({
             ok: false,
             msg: 'user does not exist'
         })
@@ -40,7 +40,7 @@ export const login = async (req, res) => {
                     console.log('Redis set result:', result);
                 }
             });
-            return res.status(200).send({
+            res.status(200).send({
                 ok: true,
                 AccessToken:accessToken,
                 RefreshToken:refreshToken
