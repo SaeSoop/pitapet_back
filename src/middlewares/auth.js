@@ -11,51 +11,52 @@ var api_url = "";
 
 
 export const authJWT = (req, res, next) => {
-    if (req.headers.authorization) {
+  //헤더 처리
+  if (req.headers.authorization) {
 
-      const token = req.headers.authorization.split('Bearer ')[1];
+    const token = req.headers.authorization.split('Bearer ')[1];
 
-      const result = verify(token);
+    //토큰 채굴
+    const result = verify(token);
 
-      if (result.ok) {
-        req.id = result.id;
-        req.role = result.role;
-        next();
-      } else {
-        res.status(401).send({
-          ok: false,
-          message: result.message,  
-        });
-      }
+    if (result.ok) {
+      req.id = result.user_id;
+      next();
     } else {
       res.status(401).send({
         ok: false,
-        message: " 로그인 수행이 필요합니다. "
+        message: result.message,
       });
     }
-  };
+  } else {
+    res.status(401).send({
+      ok: false,
+      message: " 로그인 수행이 필요합니다. "
+    });
+  }
+};
 
 
 //네이버로부터받은 code,state를 이용해서 접근 토큰 받아내기
-export const naver_callback = (req,res,next) => {
+export const naver_callback = (req, res, next) => {
   const code = req.query.code;
   const state = req.query.state;
   api_url = 'https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id='
-      + client_id + '&client_secret=' + client_secret + '&redirect_uri=' + redirectURI + '&code=' + code + '&state=' + state;
+    + client_id + '&client_secret=' + client_secret + '&redirect_uri=' + redirectURI + '&code=' + code + '&state=' + state;
 
   var options = {
-      url: api_url,
-      headers: { 'X-Naver-Client-Id': client_id, 'X-Naver-Client-Secret': client_secret }
+    url: api_url,
+    headers: { 'X-Naver-Client-Id': client_id, 'X-Naver-Client-Secret': client_secret }
   };
 
   request.get(options, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-          const data=JSON.parse(body);
-          req.accessToken=data.access_token;
-          next();
+    if (!error && response.statusCode == 200) {
+      const data = JSON.parse(body);
+      req.accessToken = data.access_token;
+      next();
 
-      } else {
-          return 'error';
-      }
+    } else {
+      return 'error';
+    }
   });
 }

@@ -2,6 +2,7 @@ import express from 'express';
 import create from "../controller/my_puppy/puppy_create.js";
 import profile from "../controller/my_puppy/puppy_profile.js";
 import update from "../controller/my_puppy/puppy_update.js";
+import { authJWT } from '../middlewares/auth.js';
 
 const router = express.Router();
 
@@ -9,9 +10,10 @@ const router = express.Router();
 //app.js에서 기본 경로에 /my-puppy를 사용하기 떄문에 /my-puppy 라우트 경로를 가짐
 router.get('/', profile);
 
+//POST /api/my-puppy/create
 //강아지 추가를 위한 라우트
 //app.js에서 기본 경로에 /my-puppy를 사용하기 떄문에 /my-puppy/insert 라우트 경로를 가짐
-router.post('/create', create);
+router.post('/create', authJWT ,create);
 
 //강아지 정보 수정을 위한 라우트
 //app.js에서 기본 경로에 /my-puppy를 사용하기 떄문에 /my-puppy/update-profile 라우트 경로를 가짐

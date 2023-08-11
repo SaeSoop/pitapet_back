@@ -8,7 +8,9 @@ export const puppy_profile = async (conn, params) => {
 }
 
 export const insert_puppy = async (conn, params) => {
-    const puppyInsert = `insert into MyPuppy set ?`;
+    const puppyInsert = `INSERT INTO MyPuppy (dog_name, dog_birth, dog_family, dog_breed, dog_sex, dog_ability, dog_char,
+        dog_game, dog_snack, dog_illness, user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)`;
+
 
     //await conn.query(puppyList_query, params);
     const [newPuppy] = await conn.query(puppyInsert, params);

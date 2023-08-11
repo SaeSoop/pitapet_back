@@ -8,6 +8,6 @@ const router = express.Router();
 router.use('/api/user', authRouter);
 
 //my-puppy
-router.use('/my-puppy', myPuppyRouter);    // 라우트를 추가하고 기본 경로로 /my-puppy 사용
+router.use('/api/my-puppy', myPuppyRouter);    // 라우트를 추가하고 기본 경로로 /my-puppy 사용
 
 export default router;
