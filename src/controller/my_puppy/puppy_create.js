@@ -1,7 +1,5 @@
 import { insert_puppy } from "../../dao/my_puppy/myPuppyDao.js";
 import pool from "../../config/database.js";
-//import { search_user } from "../../dao/my_puppy/myPuppyDao.js";
-
 
 export const create = async (req, res) => {
 
