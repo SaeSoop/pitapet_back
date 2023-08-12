@@ -31,3 +31,15 @@ export const update_puppy = async (conn, params) => {
 
     return [updatedPuppy];
 };
+
+export const delete_puppy = async (conn, params) => {
+    
+    const puppyDelete = `
+        delete from MyPuppy where dog_id=?
+    `;
+
+    //await conn.query(puppyList_query, params);
+    const result = await conn.query(puppyDelete, params);
+
+    return result;
+};
