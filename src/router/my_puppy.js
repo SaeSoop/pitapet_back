@@ -2,6 +2,7 @@ import express from 'express';
 import create from "../controller/my_puppy/puppy_create.js";
 import profile from "../controller/my_puppy/puppy_profile.js";
 import update from "../controller/my_puppy/puppy_update.js";
+import delete_data from "../controller/my_puppy/puppy_delete.js";
 import { authJWT } from '../middlewares/auth.js';
 
 const router = express.Router();
@@ -20,8 +21,6 @@ router.put('/update/:itemNumber', authJWT, update);
 
 //강아지 정보 삭제
 //DELETE: /api/my-puppy/delete
-// router.delete('/delete', function(req, res) {
-//     res.send('/my-puppy/delete 라우트');
-// });
+router.delete('/delete/:itemNumber', authJWT, delete_data);
 
 export default router;
