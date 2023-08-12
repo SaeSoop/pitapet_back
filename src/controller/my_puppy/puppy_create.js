@@ -13,10 +13,13 @@ export const create = async (req, res) => {
     //DB
     const [myPuppy] = await insert_puppy(conn, params);
 
-    res.status(200).json({
-        ok:true
-    })
-
-}
+    
+    
+    res.status(200).send({
+        success: true,
+        msg: "강아지 추가 완료",
+    });
+    //res.status(400).send('Bad Request');
+};
 
 export default create;
