@@ -12,7 +12,10 @@ export const profile = async(req, res) => {
     const [myPuppy] = await puppy_profile(conn, user_id);
     console.log(myPuppy);
 
-    res.send(myPuppy);
+    //강아지 목록
+    res.status(200).json(myPuppy);
+    //res.status(400).send('Bad Request');
+
 }
 
 export default profile;
