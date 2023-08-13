@@ -4,12 +4,12 @@ import pool from "../../config/database.js";
 export const update = async(req, res) => {
     
     const dog_id = req.params.itemNumber;
-    const user_id = req.id;
+    //const user_id = req.id;
 
     //params
-    const {name, birth, family, breed, sex, ability, char, game, snack, illness} = req.body;
+    const {dog_name, dog_birth, dog_family, dog_breed, dog_sex, dog_ability, dog_char, dog_game, dog_snack, dog_illness} = req.body;
     const conn = await pool.getConnection();
-    const params = [ name, birth, family, breed, sex, ability, char, game, snack, illness, dog_id];
+    const params = [ dog_name, dog_birth, dog_family, dog_breed, dog_sex, dog_ability, dog_char, dog_game, dog_snack, dog_illness, dog_id];
 
     //DB
     const result = await update_puppy(conn, params);
