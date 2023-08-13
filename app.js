@@ -35,7 +35,7 @@ const SERVER_HOST = process.env.SERVER_HOST;
 
 app.listen(SERVER_HOST, '0.0.0.0', () => {
     console.log(`✅ Server running at http://localhost:${SERVER_HOST} 🚀`);
-  });
+});
 
 
 export default app;
