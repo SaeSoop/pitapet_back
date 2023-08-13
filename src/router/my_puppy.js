@@ -4,6 +4,8 @@ import profile from "../controller/my_puppy/puppy_profile.js";
 import update from "../controller/my_puppy/puppy_update.js";
 import delete_data from "../controller/my_puppy/puppy_delete.js";
 import { authJWT } from '../middlewares/auth.js';
+import storage from "../utils/storage.js";
+import multer from "multer";
 
 const router = express.Router();
 
@@ -13,7 +15,8 @@ router.get('/', authJWT, profile);
 
 //강아지 추가
 //POST: /api/my-puppy/create
-router.post('/create', authJWT, create);
+const upload = multer({storage: storage}); //multer 객체 생성
+router.post('/create', authJWT, upload.single('profile'), create);
 
 //강아지 정보 수정
 //PUT /api/my-puppy/update
