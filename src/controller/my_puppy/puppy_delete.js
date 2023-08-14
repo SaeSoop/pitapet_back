@@ -4,7 +4,6 @@ import pool from "../../config/database.js";
 export const delete_data = async(req, res) => {
     
     const dog_id = req.params.itemNumber;
-    const user_id = req.id;
 
     //params
     const conn = await pool.getConnection();
