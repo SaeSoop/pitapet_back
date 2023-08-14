@@ -14,6 +14,8 @@ export const update = async(req, res) => {
     //DB
     const result = await update_puppy(conn, params);
 
+    conn.release();
+    
     res.status(200).send({
         success: true,
         msg: "강아지 정보 수정 완료",

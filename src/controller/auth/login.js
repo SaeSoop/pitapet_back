@@ -13,6 +13,7 @@ export const login = async (req, res) => {
 
     //DB
     const [userInfo] = await auth_user(conn, email);
+    conn.release();
 
     //유저 정보가 없을 경우
     if (userInfo.length === 0) {

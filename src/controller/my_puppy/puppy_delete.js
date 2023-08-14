@@ -12,11 +12,12 @@ export const delete_data = async(req, res) => {
     //DB
     const result = await delete_puppy(conn, dog_id);
 
+    conn.release();
     res.status(200).send({
         success: true,
         msg: "강아지 삭제 완료",
     });
-    //res.status(400).send('Bad Request');
+
 }
 
 export default delete_data;

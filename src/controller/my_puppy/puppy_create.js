@@ -13,7 +13,7 @@ export const create = async (req, res) => {
     //DB
     const [myPuppy] = await insert_puppy(conn, params);
 
-    
+    conn.release();
     
     res.status(200).send({
         success: true,

@@ -13,6 +13,8 @@ export const isExist = async (req, res) => {
         //이미 있는 사용자인지 확인
         const [alreadyUser] = await check_user(conn, email);
 
+        conn.release();
+        
         //사용자가 있을 경우
         if (alreadyUser.length!=0) {
             res.status(200).send({

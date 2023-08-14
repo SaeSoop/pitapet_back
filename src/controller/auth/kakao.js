@@ -18,6 +18,7 @@ export const kakao = async (req, res) => {
 
     //DB
     const [accessToken] = await SignInSocial('kakao', [email]);
+    conn.release();
 
     if (accessToken.length < 7) {
         res.status(404).send({

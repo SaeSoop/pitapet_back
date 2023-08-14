@@ -23,6 +23,8 @@ export const join = async (req, res) => {
         params = [email, password, pnumber, name, sex, birth];
         const [newUser] = await insert_user(conn, params);
 
+        conn.release();
+
         //토큰 발급
         const AccessToken = sign(newUser[0]);
         const RefreshToken = refresh(newUser);

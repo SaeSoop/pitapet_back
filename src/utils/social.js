@@ -15,6 +15,7 @@ export const SignInSocial = async (which, params) => {
 
     const [alreadyUser] = await isUserExist(conn, params[0]);
     if (alreadyUser && which == alreadyUser) {
+        conn.release();
         return [alreadyUser];
     } else {
         //DB 회원가입 & 사용자가 없을 경우
@@ -23,6 +24,8 @@ export const SignInSocial = async (which, params) => {
         } else if (which === 'naver') {
             await insert_user(conn, params);
         }
+    
+        conn.release();
 
         const [user] = await social_select_user(conn, params[0]);
         return [jwt.sign({ user_id: user[0].user_id }, process.env.JWT_SECRET)];
