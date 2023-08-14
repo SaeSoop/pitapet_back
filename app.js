@@ -11,8 +11,7 @@ import router from "./src/router/index.js";
 const app = express();
 
 app.use(cors({
-    origin: ["http://localhost:5173", "http://localhost:5174","http://localhost:3000" ], // 접근 권한을 부여하는 도메인들의 배열
-    credentials: true, // 응답 헤더에 Access-Control-Allow-Credentials 추가
+    origin: ["http://43.202.64.233","http://localhost:3000" ], // 접근 권한을 부여하는 도메인들의 배열
     optionsSuccessStatus: 200, // 응답 상태 200으로 설정
 }));
 
