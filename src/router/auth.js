@@ -28,9 +28,9 @@ router.post('/kakao', kakao);
 router.post('/naver/login', naver_login);
 
 //POST /api/user/naver/callback
-router.post('/naver/callback', naver_callback, naver_token);
+router.get('/naver/callback', naver_callback, naver_token);
 
 //POST /api/user/naver/token
-router.post('/naver/token', naver_token);
+router.get('/naver/token', naver_token);
 
 export default router;
