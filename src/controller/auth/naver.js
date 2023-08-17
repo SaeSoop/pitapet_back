@@ -24,6 +24,7 @@ export const naver_token = async (req, res) => {
     // const headers = "AAAAOFLL4xSpTGbRI0S34g3aKtkx5aRqgwA5N-w7TfgEfs7g-UfBNDidYgUPCqjE7JYmjDTRYv0_QYqaAdqoK1m3-4o";
 
     const headers = req.accessToken;
+    console.log(headers);
     const result = await axios.get("https://openapi.naver.com/v1/nid/me", {
         headers: {
             Authorization: `Bearer ${headers}`,

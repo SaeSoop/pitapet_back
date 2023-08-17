@@ -25,7 +25,7 @@ router.get('/refresh', refresh);
 router.post('/kakao', kakao);
 
 //POST /api/user/naver/login
-router.post('/naver/login', naver_login);
+router.get('/naver/login', naver_login);
 
 //POST /api/user/naver/callback
 router.get('/naver/callback', naver_callback, naver_token);
