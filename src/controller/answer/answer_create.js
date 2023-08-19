@@ -8,8 +8,8 @@ export const create = async (req, res) => {
     const {content} = req.body;
 
     const user_id = req.id;
-    const regdate = getDate()
-    const question_id = getIndex()
+    const regdate = getDate();
+    const question_id = getIndex();
 
     const params = [content, regdate, question_id, user_id];
 
@@ -21,7 +21,7 @@ export const create = async (req, res) => {
     conn.release();
     
     res.status(200).send({
-        success: true,
+        ok: true,
         msg: "답변 추가 완료",
     });
 };
