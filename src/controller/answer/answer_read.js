@@ -1,4 +1,4 @@
-import { read_question } from "../../dao/question/questionDao.js";
+import { read_answer } from "../../dao/answer/answerDao.js";
 import getIndex from "../../utils/getIndex.js";
 import pool from "../../config/database.js";
 
@@ -10,13 +10,13 @@ export const read = async(req, res) => {
     const conn = await pool.getConnection();
 
     //DB
-    const [question] = await read_question(conn, Number(diffDay + 1));
-    console.log(question);
+    const [answer] = await read_answer(conn, diffDay);
+    console.log(answer);
 
     conn.release();
 
-    //질문 목록
-    res.status(200).json(question);
+    //답변 목록 목록
+    res.status(200).json(answer);
     //res.status(400).send('Bad Request');
 }
 

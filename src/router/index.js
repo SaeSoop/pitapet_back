@@ -2,6 +2,7 @@ import express from "express";
 import authRouter from "../router/auth.js"
 import questionRouter from "../router/question.js"
 import myPuppyRouter from "../router/my_puppy.js"
+import answerRouter from "../router/answer.js"
 
 const router = express.Router();
 
@@ -13,5 +14,9 @@ router.use('/api/my-puppy', myPuppyRouter);    // 라우트를 추가하고 기�
 
 //question
 router.use('/api/question', questionRouter);    // 라우트를 추가하고 기본 경로로 /my-puppy 사용
+
+//answer
+router.use('/api/answer', answerRouter);    // 라우트를 추가하고 기본 경로로 /my-puppy 사용
+
 
 export default router;
