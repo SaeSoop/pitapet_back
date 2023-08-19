@@ -19,4 +19,4 @@ export const create = async (req, res) => {
     });
 };
 
-export default insert_question;
+export default create;
