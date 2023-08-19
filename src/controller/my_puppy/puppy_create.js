@@ -1,13 +1,9 @@
 import { insert_puppy } from "../../dao/my_puppy/myPuppyDao.js";
 import pool from "../../config/database.js";
-import getPropertyPath from "../../utils/getPropertyPath.js";
 import multer from "multer";
-import path from "path";
 import storage from "../../utils/storage.js";
 
-
 const upload = multer({storage: storage}); //multer 객체 생성
-
 
 export const create = async (req, res) => {
 

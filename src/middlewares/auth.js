@@ -41,6 +41,9 @@ export const authJWT = (req, res, next) => {
 export const naver_callback = (req, res, next) => {
   const code = req.query.code;
   const state = req.query.state;
+  console.log('naver callback');
+  console.log(code);
+  console.log(state);
   api_url = 'https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id='
     + client_id + '&client_secret=' + client_secret + '&redirect_uri=' + redirectURI + '&code=' + code + '&state=' + state;
 
@@ -50,13 +53,24 @@ export const naver_callback = (req, res, next) => {
   };
 
   request.get(options, function (error, response, body) {
+    const data = JSON.parse(body);
+    if(data.error){
+      return res.status(401).json({
+        ok:false,
+        msg:'Authentication failed',
+        data
+      });
+    }
     if (!error && response.statusCode == 200) {
-      const data = JSON.parse(body);
+      console.log(data);
       req.accessToken = data.access_token;
       next();
 
     } else {
-      return 'error';
+      return res.status(401).json({
+        ok:false,
+        msg:'Authentication failed'
+      });
     }
   });
 }
