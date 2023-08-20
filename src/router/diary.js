@@ -10,7 +10,7 @@ const router = express.Router();
 // 일기 등록하기
 // POST: /api/diary/create
 const upload = multer({storage: storage}); 
-router.post('/create', authJWT, upload.single('profile'), create);
+router.post('/create', authJWT, upload.single('photo'), create);
 
 // 일기 수정하기
 // PUT /api/diary/update
