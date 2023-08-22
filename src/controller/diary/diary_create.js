@@ -12,6 +12,7 @@ export const create = async (req, res) => {
     const diary_image = path.replace(/\\/g, "/"); 
     const diary_date =getDate();
 
+
     const { diary_title, diary_content, diary_mood, diary_isPrivate } = req.body;
     const user_id = req.id;
     const params = [ diary_image, diary_title, diary_content, diary_date, diary_mood, diary_isPrivate, user_id ];
@@ -31,4 +32,3 @@ export const create = async (req, res) => {
 };
 
 export default create;
-
