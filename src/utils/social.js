@@ -14,6 +14,7 @@ export const SignInSocial = async (which, params) => {
     const conn = await pool.getConnection();
 
     const [alreadyUser] = await isUserExist(conn, params[0]);
+
     if (alreadyUser && which == alreadyUser) {
         conn.release();
         return [alreadyUser];
@@ -25,9 +26,8 @@ export const SignInSocial = async (which, params) => {
             await insert_user(conn, params);
         }
     
-        conn.release();
-
         const [user] = await social_select_user(conn, params[0]);
+        conn.release();
         return [jwt.sign({ user_id: user[0].user_id }, process.env.JWT_SECRET)];
 
     };
