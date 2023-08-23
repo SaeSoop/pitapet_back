@@ -8,19 +8,22 @@ export const checkForm = function ( year, month, date, hours, minutes, seconds )
         date = "0" + date;
     }
 
-    if(hours < 10){
-        hours = "0" + hours;
-    }
+    return `${year}-${month}-${date}`;
 
-    if(minutes < 10){
-        minutes = "0" + minutes;
-    }
+    // 일기 날짜 테스트 용으로 얘도 잠시 주석 처리 해둘게요 .. -수빈
+    // if(hours < 10){
+    //     hours = "0" + hours;
+    // }
 
-    if(seconds < 10){
-        seconds = "0" + seconds;
-    }
+    // if(minutes < 10){
+    //     minutes = "0" + minutes;
+    // }
 
-    return `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
+    // if(seconds < 10){
+    //     seconds = "0" + seconds;
+    // }
+
+    // return `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
 };
 
 export default checkForm;
