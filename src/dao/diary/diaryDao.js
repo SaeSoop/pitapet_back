@@ -20,4 +20,15 @@ export const update_diary = async (conn, params) => {
     
     const [updatedDiary] = await conn.query(diaryUpdate, params);
     return [updatedDiary];
-}
+};
+
+// 일기 조회 쿼리
+export const open_diary = async (conn, params) => {
+
+    const diaryOpen = `
+        SELECT diary_id FROM Diary WHERE diary_date = ?
+    `;
+
+    const [openedDiary] = await conn.query(diaryOpen, params);
+    return [openedDiary];
+};
