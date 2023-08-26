@@ -12,6 +12,7 @@ const app = express();
 
 app.use(cors({
     origin: ["http://43.202.64.233","http://localhost:3000" ], // 접근 권한을 부여하는 도메인들의 배열
+    credentials: true,
     optionsSuccessStatus: 200, // 응답 상태 200으로 설정
 }));
 
