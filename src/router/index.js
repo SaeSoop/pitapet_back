@@ -4,6 +4,7 @@ import questionRouter from "../router/question.js"
 import myPuppyRouter from "../router/my_puppy.js"
 import diaryRouter from "../router/diary.js"
 import answerRouter from "../router/answer.js"
+import myPageRouter from "../router/myPage.js"
 
 const router = express.Router();
 
@@ -22,5 +23,7 @@ router.use('/api/question', questionRouter);
 //answer
 router.use('/api/answer', answerRouter);    
 
+//mypage
+router.use('/api/my-page', myPageRouter);    
 
 export default router;
