@@ -1,3 +1,54 @@
+// 일기 전체 조회 (최신순) - 제목, 작성자만
+export const read_diary = async (conn) => {
+    const readDiaryList = `
+        SELECT Diary.diary_title, Diary.diary_date, Diary.like_count, User.name AS username
+        FROM Diary 
+        JOIN User ON Diary.user_id = User.user_id
+        ORDER BY Diary.diary_id DESC;
+    `;
+    const [totalDiary] = await conn.query(readDiaryList);
+
+    return [totalDiary];
+};
+
+// 일기 전체 조회 (최신순) - 제목, 작성자만
+export const read_top5 = async (conn) => {
+    const getTop5Query = `
+        SELECT * FROM Diary 
+        ORDER BY like_count DESC LIMIT 5;
+    `;
+    const [top5] = await conn.query(getTop5Query);
+
+    return [top5];
+};
+
+export const diary_count = async (conn, params) => {
+
+    const getDiaryCount  = `
+        SELECT COUNT(*) AS diaryCount 
+        FROM Diary
+        WHERE user_id = ?;
+    `;
+
+    const results = await conn.query(getDiaryCount, params);
+    
+    const diaryCount = results[0][0].diaryCount;
+    console.log("diaryCount ", diaryCount);
+
+    return results;
+};
+
+// user_id로 작성자 찾기
+export const get_nickname = async (conn, params) => {
+    const getUserQuery = `
+        SELECT name FROM User WHERE user_id = ?;
+    `;
+    const user = await conn.query(getUserQuery, params);
+
+    return user;
+};
+
+
 // 일기 등록 퀴리
 export const create_diary = async (conn, params) => {
 
@@ -22,7 +73,7 @@ export const update_diary = async (conn, params) => {
     return [updatedDiary];
 };
 
-// 일기 조회 쿼리
+// 일기 날짜 검색 쿼리
 export const open_diary = async (conn, params) => {
 
     const diaryOpen = `
@@ -114,3 +165,4 @@ export const postLikeCancel = async (conn, params) => {
         //res.status(200).send("getResult");
     }
 };
+
